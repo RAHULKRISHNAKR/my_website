@@ -1,0 +1,402 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    background: url('assets/coding-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Overlay for readability */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+    z-index: -1;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #ff6f61; /* Vibrant background color */
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+  }
+  
+  nav:hover {
+    background-color: #ff4c3b; /* Slightly darker shade on hover */
+  }
+  
+  nav .logo {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    position: relative; /* Positioning for escaping effect */
+    display: inline-block; /* Allows for transformations */
+    transition: color 0.3s ease, opacity 0.3s ease; /* Smooth transition for color and opacity */
+}
+
+nav .logo:hover {
+    color: #ffeb3b; /* Change text color on hover */
+}
+
+  nav .nav-links {
+    list-style: none;
+  }
+  
+  nav .nav-links li {
+    display: inline-block;
+    margin-left: 20px;
+  }
+  
+  nav .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth color transitions */
+  }
+  
+  nav .nav-links a:hover {
+    background-color: #ffffff; /* White background on hover */
+    color: #ff6f61; /* Change text color to vibrant color on hover */
+    border-radius: 4px; /* Rounded corners for hover effect */
+  }
+  
+/* Custom Cursor */
+.cursor {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 60px;
+    margin-bottom: 20px;
+    opacity: 0; /* Initial state for animation */
+    animation: fadeInUp 0.8s forwards; /* Animation */
+}
+
+.hero .highlight {
+    color: #a8dadc;
+}
+
+.hero p {
+    font-size: 24px;
+    margin-bottom: 30px;
+    opacity: 0; /* Initial state for animation */
+    animation: fadeInUp 1s forwards; /* Animation */
+    animation-delay: 0.2s; /* Delay */
+}
+
+.hero .btn {
+    padding: 12px 36px;
+    background-color: #e63946;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Added transform transition */
+}
+
+.hero .btn:hover {
+    background-color: #a8dadc;
+    transform: scale(1.05); /* Scale effect on hover */
+}
+
+.about {
+    padding: 100px 20px;
+    text-align: center;
+    background-color: rgba(26, 27, 25, 0.8);
+  }
+  
+  .about-details {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    max-width: 300px;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card h3 {
+    margin-bottom: 10px;
+  }
+  
+  .card ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .card li {
+    margin: 5px 0;
+  }
+  
+  .icon {
+    margin-right: 8px;
+  }
+  
+
+/* Projects Section */
+.projects {
+    background-color: rgba(42, 41, 41, 0.9);
+    padding: 100px 20px; /* Added side padding for smaller screens */
+    text-align: center;
+    color: #fff;
+    border-radius: 15px; /* Rounded corners for the section */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+}
+
+.projects h2 {
+    font-size: 36px;
+    margin-bottom: 40px; /* Increased space for better separation */
+}
+
+.project-list {
+    display: grid; /* Use grid layout for responsive design */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Spacing between projects */
+}
+
+.project {
+    background-color: #fff; /* White background for projects */
+    margin: 20px; /* Margin for the project cards */
+    border-radius: 10px; /* Rounded corners for project cards */
+    overflow: hidden; /* Hide overflow */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for elevation */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+}
+
+.project:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+
+.project-image {
+    overflow: hidden; /* Crop image to fit the card */
+}
+
+.project-image img {
+    width: 100%; /* Full width for images */
+    height: auto; /* Maintain aspect ratio */
+    transition: transform 0.3s ease; /* Smooth image zoom */
+}
+
+.project:hover .project-image img {
+    transform: scale(1.1); /* Zoom effect on image hover */
+}
+
+.project-info {
+    padding: 20px; /* Inner padding for text */
+    text-align: left; /* Left align text */
+}
+
+.project-info h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333; /* Dark text color for contrast */
+}
+
+.project-info p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #555; /* Slightly lighter for readability */
+}
+
+.project .btn {
+    padding: 8px 16px;
+    background-color: #457b9d;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Added transform transition */
+}
+
+.project .btn:hover {
+    background-color: #1d3557; /* Darker shade on hover */
+    transform: scale(1.05); /* Scale effect on button hover */
+}
+
+
+/* Contact Section */
+.contact {
+    padding: 100px 0;
+    text-align: center;
+    background-color: rgba(51, 51, 51, 0.8); /* Darker background for better visibility */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow effect for depth */
+}
+
+.contact h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #a8dadc; /* Lighter color for better contrast */
+}
+
+.contact p {
+    font-size: 18px;
+    color: #ffffff; /* White for good contrast */
+}
+
+.contact .social-links {
+    margin-top: 20px;
+}
+
+.contact .social-links a {
+    margin: 0 20px;
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 15px; /* Add padding for better touch targets */
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background for links */
+    border-radius: 5px; /* Rounded corners for links */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Added transform transition */
+}
+
+.contact .social-links a:hover {
+    background-color: rgba(255, 255, 255, 0.4); /* Change background on hover */
+    color: #000; /* Change text color on hover for contrast */
+    transform: scale(1.05); /* Scale effect on hover */
+}
+
+.contact .social-links a img {
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer .socials a {
+    color: #fff;
+    margin: 0 10px;
+    font-size: 18px;
+    text-decoration: none;
+    transition: color 0.3s ease; /* Added transition */
+}
+
+footer .socials a:hover {
+    color: #a8dadc; /* Hover color */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.fixed-coffee-button {
+    position: fixed;
+    bottom: 20px;
+    text-decoration: none;
+    right: 20px;
+    background-color: #ffdd00;
+    color: #000;
+    padding: 15px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Ensures it stays on top */
+    transition: background-color 0.3s ease;
+  }
+  
+  .fixed-coffee-button:hover {
+    background-color: #e6c300;
+  }
+  
+  /* Example media query for mobile devices */
+@media (max-width: 768px) {
+    .nav-links {
+      flex-direction: column; /* Stack nav links vertically */
+      align-items: center;
+    }
+  
+    .hero h1 {
+      font-size: 40px; /* Smaller font size on mobile */
+    }
+  
+    .about {
+      flex-direction: column; /* Stack content on top of each other */
+    }
+  
+    .project-list {
+      flex-direction: column; /* Stack projects vertically */
+      align-items: center; /* Center projects */
+    }
+  
+    .project {
+      max-width: 90%; /* Ensure projects are not too wide */
+    }
+  
+    /* Adjust button sizes for mobile */
+    .hero .btn,
+    .project .btn {
+      padding: 10px 20px; /* Smaller button padding */
+    }
+  }
+  
