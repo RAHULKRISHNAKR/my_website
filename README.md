@@ -3,7 +3,7 @@
 
 # Rahul Krishna K R | Creative Portfolio
 
-Welcome to my personal portfolio website! This project showcases my skills and projects as a Data Scientist and Creative Developer. The website is designed to be visually appealing and interactive, offering a unique experience for visitors.
+ This project showcases my skills and projects as a Data Scientist and Creative Developer. The website is designed to be visually appealing and interactive, offering a unique experience for visitors.
 
 ## Table of Contents
 
@@ -60,7 +60,7 @@ To get a local copy up and running, follow these steps:
 
 ## Customization
 
-You can customize this portfolio by modifying the following:
+Customize this portfolio by modifying the following:
 
 - **Profile Information**: Update the personal information in the `About Me` section of the HTML file.
 - **Project Details**: Add, remove, or modify projects in the `Projects` section.
