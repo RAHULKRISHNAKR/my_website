@@ -950,4 +950,22 @@ footer .socials a:hover {
       justify-content: center;
   }
 }
-  
+
+.role-card .card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.role-card .role-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.role-card .text-content {
+  text-align: center;
+}
