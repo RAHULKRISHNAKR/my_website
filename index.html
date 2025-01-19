@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Rahul Krishna K R - Creative Portfolio">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Rahul Krishna K R | Creative Portfolio</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
@@ -16,20 +17,50 @@
   <!-- Navigation -->
   <nav data-aos="fade-down" data-aos-duration="1000">
     <div class="logo">Rahul Krishna K R</div>
+    <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
     <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>    
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>    
     </ul>
-  </nav>
+</nav>
 
-  <!-- Hero Section -->
   <section id="home" class="hero" data-aos="fade-up" data-aos-duration="1000">
     <h1>Hi, I'm <span class="highlight">Rahul Krishna K R</span></h1>
     <p>Data Scientist & Creative Developer</p>
     <a href="#projects" class="btn">Discover More</a>
-  </section>
+    <div class="scroll-indicator">
+        <span>Scroll to meet me</span>
+        <div class="arrow-down"></div>
+    </div>
+</section>
+
+<!-- New Profile Section -->
+<section id="profile" class="profile-section">
+  <div class="profile-container" data-aos="fade-up" data-aos-duration="1200">
+      <div class="profile-content">
+          <div class="profile-image-wrapper">
+              <div class="profile-image">
+                  <img src="assets/profile.jpg" alt="Rahul Krishna K R">
+              </div>
+              <svg class="arrow-pointer" viewBox="0 0 100 100">
+                  <path d="M10,50 Q30,50 45,35 T80,20" class="arrow-path"/>
+                  <text x="85" y="15" class="arrow-text">That's Me!</text>
+              </svg>
+          </div>
+          <div class="profile-text">
+              <h2>The Developer Behind The Code</h2>
+              <p>Passionate about creating innovative solutions through data science and creative development.</p>
+          </div>
+      </div>
+  </div>
+</section>
+
 
 <!-- About Section -->
 <section id="about" class="about">
@@ -78,32 +109,101 @@
   
 
   <!-- Projects Section -->
-<section id="projects" class="projects" data-aos="fade-right" data-aos-duration="1000">
+  <section id="projects" class="projects" data-aos="fade-right" data-aos-duration="1000">
     <h2>Featured Projects</h2>
     <div class="project-list">
+        <!-- Project 1 -->
         <div class="project" data-aos="zoom-in" data-aos-duration="1000">
             <div class="project-image">
                 <img src="assets/project1.png" alt="Project 1">
             </div>
             <div class="project-info">
-                <h3>Lorum Ipsum</h3>
-                <p>ekfsndaelgjhfnoaelszfkcq,pas;olgzkhnvc alsozdkm,a;slzg,j.vn</p>
+                <h3>Project 1</h3>
+                <p>Description of your first project goes here</p>
+                <div class="project-tags">
+                    <span>Python</span>
+                    <span>Data Science</span>
+                </div>
                 <a href="#" class="btn">View Project</a>
             </div>
         </div>
-        <div class="project" data-aos="zoom-in" data-aos-duration="1200">
-            <div class="project-image">
-                <img src="assets/project2.png" alt="Project 2">
-            </div>
-            <div class="project-info">
-                <h3>Portfolio Website</h3>
-                <p>My personal portfolio website, showcasing creative and technical skills in data science and front-end development.</p>
-                <a href="#" class="btn">View Project</a>
-            </div>
+
+        <div class="project" data-aos="zoom-in" data-aos-duration="1000">
+          <div class="project-image">
+              <img src="assets/project1.png" alt="Project 1">
+          </div>
+          <div class="project-info">
+              <h3>Project 1</h3>
+              <p>Description of your first project goes here</p>
+              <div class="project-tags">
+                  <span>Python</span>
+                  <span>Data Science</span>
+              </div>
+              <a href="#" class="btn">View Project</a>
+          </div>
+      </div>
+
+      <div class="project" data-aos="zoom-in" data-aos-duration="1000">
+        <div class="project-image">
+            <img src="assets/project1.png" alt="Project 1">
         </div>
-        <!-- Add more project cards as needed -->
+        <div class="project-info">
+            <h3>Project 1</h3>
+            <p>Description of your first project goes here</p>
+            <div class="project-tags">
+                <span>Python</span>
+                <span>Data Science</span>
+            </div>
+            <a href="#" class="btn">View Project</a>
+        </div>
     </div>
-</section>
+
+    <div class="project" data-aos="zoom-in" data-aos-duration="1000">
+      <div class="project-image">
+          <img src="assets/project1.png" alt="Project 1">
+      </div>
+      <div class="project-info">
+          <h3>Project 1</h3>
+          <p>Description of your first project goes here</p>
+          <div class="project-tags">
+              <span>Python</span>
+              <span>Data Science</span>
+          </div>
+          <a href="#" class="btn">View Project</a>
+      </div>
+  </div>
+
+  <div class="project" data-aos="zoom-in" data-aos-duration="1000">
+    <div class="project-image">
+        <img src="assets/project1.png" alt="Project 1">
+    </div>
+    <div class="project-info">
+        <h3>Project 1</h3>
+        <p>Description of your first project goes here</p>
+        <div class="project-tags">
+            <span>Python</span>
+            <span>Data Science</span>
+        </div>
+        <a href="#" class="btn">View Project</a>
+    </div>
+</div>
+
+<div class="project" data-aos="zoom-in" data-aos-duration="1000">
+  <div class="project-image">
+      <img src="assets/project1.png" alt="Project 1">
+  </div>
+  <div class="project-info">
+      <h3>Project 1</h3>
+      <p>Description of your first project goes here</p>
+      <div class="project-tags">
+          <span>Python</span>
+          <span>Data Science</span>
+      </div>
+      <a href="#" class="btn">View Project</a>
+  </div>
+</div>
+      </div>
+    </section>
 
 
   <!-- Contact Section -->

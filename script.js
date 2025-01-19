@@ -52,4 +52,68 @@ window.addEventListener('scroll', function () {
       const moveY = deltaY > 0 ? -10 : 10; // Larger up or down movement
       logo.style.transform = `translate(${moveX}px, ${moveY}px)`;
   }
-  
+// Mobile Navigation Toggle
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+const navLinksItems = document.querySelectorAll('.nav-links li');
+
+hamburger.addEventListener('click', () => {
+    // Toggle Navigation
+    navLinks.classList.toggle('active');
+    
+    // Animate Hamburger
+    hamburger.classList.toggle('active');
+    
+    // Animate Links
+    navLinksItems.forEach((link, index) => {
+        if (link.style.animation) {
+            link.style.animation = '';
+        } else {
+            link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+        }
+    });
+});
+
+// Close mobile menu when clicking a link
+navLinksItems.forEach(item => {
+    item.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('active');
+    });
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('active');
+    }
+});
+
+// Add animation for hamburger menu
+const styleSheet = document.createElement('style');
+styleSheet.textContent = `
+    @keyframes navLinkFade {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+`;
+document.head.appendChild(styleSheet);
