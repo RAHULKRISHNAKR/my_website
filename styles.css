@@ -75,7 +75,30 @@ nav .logo:hover {
     color: #ff6f61; /* Change text color to vibrant color on hover */
     border-radius: 4px; /* Rounded corners for hover effect */
   }
-  
+
+  /* GitHub Icon Styles */
+  .github-icon {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 8px !important;
+    border-radius: 50% !important;
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+  }
+
+  .github-icon:hover {
+    background-color: #ffffff !important;
+    color: #333 !important;
+    transform: scale(1.1);
+  }
+
+  .github-icon svg {
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+  }
+
 /* Custom Cursor */
 .cursor {
     position: absolute;
@@ -194,83 +217,181 @@ nav .logo:hover {
 /* Projects Section */
 .projects {
     background-color: rgba(42, 41, 41, 0.9);
-    padding: 100px 20px; /* Added side padding for smaller screens */
+    padding: 100px 20px;
     text-align: center;
     color: #fff;
-    border-radius: 15px; /* Rounded corners for the section */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .projects h2 {
     font-size: 36px;
-    margin-bottom: 40px; /* Increased space for better separation */
+    margin-bottom: 40px;
 }
 
-.project-list {
-    display: grid; /* Use grid layout for responsive design */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
-    gap: 20px; /* Spacing between projects */
+/* Slideshow Container */
+.slideshow-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-.project {
-    background-color: #fff; /* White background for projects */
-    margin: 20px; /* Margin for the project cards */
-    border-radius: 10px; /* Rounded corners for project cards */
-    overflow: hidden; /* Hide overflow */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for elevation */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+.project-slides {
+    position: relative;
+    height: 600px;
 }
 
-.project:hover {
-    transform: translateY(-5px); /* Lift effect on hover */
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+.project-slide {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    padding: 40px;
+    box-sizing: border-box;
 }
 
-.project-image {
-    overflow: hidden; /* Crop image to fit the card */
+.project-slide.active {
+    display: flex;
+    opacity: 1;
+    align-items: center;
+    gap: 40px;
 }
 
-.project-image img {
-    width: 100%; /* Full width for images */
-    height: auto; /* Maintain aspect ratio */
-    transition: transform 0.3s ease; /* Smooth image zoom */
+.project-slide .project-image {
+    flex: 1;
+    max-width: 450px;
 }
 
-.project:hover .project-image img {
-    transform: scale(1.1); /* Zoom effect on image hover */
+.project-slide .project-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
 }
 
-.project-info {
-    padding: 20px; /* Inner padding for text */
-    text-align: left; /* Left align text */
+.project-slide .project-image img:hover {
+    transform: scale(1.05);
 }
 
-.project-info h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #333; /* Dark text color for contrast */
+.project-slide .project-info {
+    flex: 1;
+    text-align: left;
+    padding: 20px;
 }
 
-.project-info p {
-    font-size: 16px;
+.project-slide .project-info h3 {
+    font-size: 28px;
     margin-bottom: 15px;
-    color: #555; /* Slightly lighter for readability */
+    color: #a8dadc;
 }
 
-.project .btn {
+.project-slide .project-info p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.project-tags span {
+    background: linear-gradient(45deg, #a8dadc, #457b9d);
+    color: #fff;
     padding: 8px 16px;
-    background-color: #457b9d;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.project-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.project-buttons .btn {
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #e63946, #a8dadc);
     color: #fff;
     text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Added transform transition */
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
 
-.project .btn:hover {
-    background-color: #1d3557; /* Darker shade on hover */
-    transform: scale(1.05); /* Scale effect on button hover */
+.project-buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
 }
 
+/* Navigation Buttons */
+.slide-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(168, 218, 220, 0.8);
+    color: #1d3557;
+    border: none;
+    padding: 15px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.slide-btn:hover {
+    background: #a8dadc;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn {
+    left: 20px;
+}
+
+.next-btn {
+    right: 20px;
+}
+
+/* Slide Indicators */
+.slide-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator.active,
+.indicator:hover {
+    background: #a8dadc;
+    transform: scale(1.2);
+}
 
 /* Contact Section */
 /* Contact Section Styles */
@@ -392,6 +513,15 @@ nav .logo:hover {
 
   .social-info span {
       font-size: 0.85rem;
+  }
+
+  .github-icon svg {
+      width: 18px;
+      height: 18px;
+  }
+
+  .github-icon {
+      padding: 12px !important;
   }
 }
 
@@ -853,67 +983,13 @@ footer .socials a:hover {
       font-size: 24px;
   }
 
-  /* Hero Section */
-  .hero h1 {
-      font-size: 32px;
-      padding: 0 20px;
+  .github-icon svg {
+      width: 18px;
+      height: 18px;
   }
 
-  .hero p {
-      font-size: 18px;
-      padding: 0 20px;
-  }
-
-  /* Profile Section */
-  .profile-section {
-      padding: 40px 20px;
-  }
-
-  .profile-content {
-      padding: 20px;
-  }
-
-  .profile-text h2 {
-      font-size: 24px;
-  }
-
-  /* Projects Section */
-  .projects {
-      padding: 40px 15px;
-  }
-
-  .project {
-      margin: 15px 0;
-  }
-
-  .project-info h3 {
-      font-size: 20px;
-  }
-
-  /* Contact Section */
-  .contact {
-      padding: 40px 20px;
-  }
-
-  .social-links {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      padding: 0 20px;
-  }
-
-  .social-links a {
-      margin: 5px;
-      padding: 8px 12px;
-      font-size: 16px;
-  }
-
-  /* Buy Me Coffee Button */
-  .fixed-coffee-button {
-      font-size: 14px;
-      padding: 10px 15px;
-      bottom: 15px;
-      right: 15px;
+  .github-icon {
+      padding: 12px !important;
   }
 }
 

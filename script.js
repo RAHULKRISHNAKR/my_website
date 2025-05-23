@@ -4,8 +4,8 @@ document.addEventListener('mousemove', e => {
     cursor.setAttribute('style', `top: ${e.pageY}px; left: ${e.pageX}px;`);
 });
 
-// Smooth Scrolling for Navigation Links
-document.querySelectorAll('nav a').forEach(anchor => {
+// Smooth Scrolling for Navigation Links (exclude external links)
+document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         document.querySelector(this.getAttribute('href')).scrollIntoView({
@@ -13,6 +13,7 @@ document.querySelectorAll('nav a').forEach(anchor => {
         });
     });
 });
+
 // Change nav background color on scroll
 window.addEventListener('scroll', function () {
     const nav = document.querySelector('nav');
@@ -117,3 +118,92 @@ styleSheet.textContent = `
     }
 `;
 document.head.appendChild(styleSheet);
+
+// Project Slideshow Functionality
+let currentSlideIndex = 0;
+const slides = document.querySelectorAll('.project-slide');
+const indicators = document.querySelectorAll('.indicator');
+
+function showSlide(index) {
+    // Hide all slides
+    slides.forEach(slide => {
+        slide.classList.remove('active');
+    });
+    
+    // Remove active class from all indicators
+    indicators.forEach(indicator => {
+        indicator.classList.remove('active');
+    });
+    
+    // Show current slide and activate indicator
+    if (slides[index]) {
+        slides[index].classList.add('active');
+        indicators[index].classList.add('active');
+    }
+}
+
+function changeSlide(direction) {
+    currentSlideIndex += direction;
+    
+    if (currentSlideIndex >= slides.length) {
+        currentSlideIndex = 0;
+    } else if (currentSlideIndex < 0) {
+        currentSlideIndex = slides.length - 1;
+    }
+    
+    showSlide(currentSlideIndex);
+}
+
+function currentSlide(index) {
+    currentSlideIndex = index - 1;
+    showSlide(currentSlideIndex);
+}
+
+// Auto-play slideshow (optional)
+function autoSlide() {
+    changeSlide(1);
+}
+
+// Auto-play every 5 seconds (uncomment to enable)
+ setInterval(autoSlide, 5000);
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') {
+        changeSlide(-1);
+    } else if (e.key === 'ArrowRight') {
+        changeSlide(1);
+    }
+});
+
+// Touch/swipe support for mobile
+let startX = 0;
+let endX = 0;
+
+const slideshowContainer = document.querySelector('.slideshow-container');
+
+if (slideshowContainer) {
+    slideshowContainer.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+    });
+
+    slideshowContainer.addEventListener('touchend', function(e) {
+        endX = e.changedTouches[0].clientX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const threshold = 50; // Minimum swipe distance
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > threshold) {
+            if (diff > 0) {
+                // Swiped left - next slide
+                changeSlide(1);
+            } else {
+                // Swiped right - previous slide
+                changeSlide(-1);
+            }
+        }
+    }
+}
