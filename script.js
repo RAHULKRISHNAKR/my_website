@@ -1,209 +1,245 @@
-// Custom Cursor
-const cursor = document.querySelector('.cursor');
-document.addEventListener('mousemove', e => {
-    cursor.setAttribute('style', `top: ${e.pageY}px; left: ${e.pageX}px;`);
-});
+// Fix navbar functionality and other script issues
 
-// Smooth Scrolling for Navigation Links (exclude external links)
-document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
+document.addEventListener('DOMContentLoaded', function() {
+    // Simple cursor tracking (disabled advanced effects that might break layout)
+    const cursor = document.querySelector('.cursor');
+    const cursorFollower = document.querySelector('.cursor-follower');
+    
+    // Disable custom cursor effects for now
+    if (cursor) cursor.style.display = 'none';
+    if (cursorFollower) cursorFollower.style.display = 'none';
+    
+    // Ensure hamburger menu works properly
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            console.log('Hamburger clicked'); // Debugging
         });
-    });
-});
-
-// Change nav background color on scroll
-window.addEventListener('scroll', function () {
-    const nav = document.querySelector('nav');
-    if (window.scrollY > 50) {
-      nav.style.backgroundColor = '#ff4c3b'; // Change to darker color when scrolled
-    } else {
-      nav.style.backgroundColor = '#ff6f61'; // Original vibrant color
+        
+        // Close mobile menu when clicking a link
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+            });
+        });
     }
-  });
-  const logo = document.querySelector('.logo');
-  let hoverTimer;
-  
-  logo.addEventListener('mouseenter', () => {
-      document.addEventListener('mousemove', escapeText);
-      // Set a timer to hide the logo after 3 seconds of hovering
-      hoverTimer = setTimeout(() => {
-          logo.style.opacity = '0'; // Make the logo disappear
-      }, 3000); // 3000 milliseconds = 3 seconds
-  });
-  
-  logo.addEventListener('mouseleave', () => {
-      logo.style.transform = 'translate(0, 0)'; // Reset position
-      logo.style.opacity = '1'; // Reset opacity
-      clearTimeout(hoverTimer); // Clear the timer when leaving
-      document.removeEventListener('mousemove', escapeText);
-  });
-  
-  function escapeText(e) {
-      const rect = logo.getBoundingClientRect();
-      const logoCenterX = rect.left + rect.width / 2;
-      const logoCenterY = rect.top + rect.height / 2;
-      const deltaX = e.clientX - logoCenterX;
-      const deltaY = e.clientY - logoCenterY;
-  
-      // Move the logo away from the cursor with larger distances
-      const moveX = deltaX > 0 ? -10 : 10; // Larger left or right movement
-      const moveY = deltaY > 0 ? -10 : 10; // Larger up or down movement
-      logo.style.transform = `translate(${moveX}px, ${moveY}px)`;
-  }
-// Mobile Navigation Toggle
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
-const navLinksItems = document.querySelectorAll('.nav-links li');
-
-hamburger.addEventListener('click', () => {
-    // Toggle Navigation
-    navLinks.classList.toggle('active');
     
-    // Animate Hamburger
-    hamburger.classList.toggle('active');
+    // Remove theme toggle functionality
     
-    // Animate Links
-    navLinksItems.forEach((link, index) => {
-        if (link.style.animation) {
-            link.style.animation = '';
-        } else {
-            link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-        }
-    });
+    // Fix project slideshow functionality
+    initializeSlideshow();
 });
 
-// Close mobile menu when clicking a link
-navLinksItems.forEach(item => {
-    item.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        hamburger.classList.remove('active');
-    });
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
-        navLinks.classList.remove('active');
-        hamburger.classList.remove('active');
-    }
-});
-
-// Add animation for hamburger menu
-const styleSheet = document.createElement('style');
-styleSheet.textContent = `
-    @keyframes navLinkFade {
-        from {
-            opacity: 0;
-            transform: translateX(50px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    .hamburger.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(5px, -5px);
-    }
-`;
-document.head.appendChild(styleSheet);
-
-// Project Slideshow Functionality
-let currentSlideIndex = 0;
-const slides = document.querySelectorAll('.project-slide');
-const indicators = document.querySelectorAll('.indicator');
-
-function showSlide(index) {
-    // Hide all slides
+// Enhanced and fixed slideshow functionality
+function initializeSlideshow() {
+    const slides = document.querySelectorAll('.project-slide');
+    const indicators = document.querySelectorAll('.indicator');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    
+    if (!slides.length) return;
+    
+    let currentSlideIndex = 0;
+    
+    // Force display and styling for all slides first
     slides.forEach(slide => {
+        // Ensure images are loaded properly
+        const img = slide.querySelector('img');
+        if (img) {
+            img.onerror = function() {
+                this.src = 'assets/placeholder.jpg'; // Fallback image
+                console.log('Image failed to load:', this.alt);
+            };
+        }
+        
+        // Reset any inline styles
+        slide.style.cssText = '';
         slide.classList.remove('active');
     });
     
-    // Remove active class from all indicators
-    indicators.forEach(indicator => {
-        indicator.classList.remove('active');
+    // Show first slide by default
+    showSlide(0);
+    
+    // Add click event to navigation buttons
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            changeSlide(-1);
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            changeSlide(1);
+        });
+    }
+    
+    // Add click events to indicators
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', function() {
+            currentSlideIndex = index;
+            showSlide(currentSlideIndex);
+        });
     });
     
-    // Show current slide and activate indicator
-    if (slides[index]) {
+    function showSlide(index) {
+        // Validate index is within bounds
+        if (index < 0 || index >= slides.length) return;
+        
+        // Hide all slides
+        slides.forEach(slide => {
+            slide.style.display = 'none';
+            slide.classList.remove('active');
+        });
+        
+        // Remove active class from all indicators
+        indicators.forEach(indicator => {
+            indicator.classList.remove('active');
+        });
+        
+        // Show the current slide with display flex and add active class
+        slides[index].style.display = 'flex';
         slides[index].classList.add('active');
-        indicators[index].classList.add('active');
-    }
-}
-
-function changeSlide(direction) {
-    currentSlideIndex += direction;
-    
-    if (currentSlideIndex >= slides.length) {
-        currentSlideIndex = 0;
-    } else if (currentSlideIndex < 0) {
-        currentSlideIndex = slides.length - 1;
+        
+        // Add active class to current indicator if it exists
+        if (indicators[index]) {
+            indicators[index].classList.add('active');
+        }
+        
+        console.log("Showing slide", index + 1, "of", slides.length);
     }
     
-    showSlide(currentSlideIndex);
-}
-
-function currentSlide(index) {
-    currentSlideIndex = index - 1;
-    showSlide(currentSlideIndex);
-}
-
-// Auto-play slideshow (optional)
-function autoSlide() {
-    changeSlide(1);
-}
-
-// Auto-play every 5 seconds (uncomment to enable)
- setInterval(autoSlide, 5000);
-
-// Keyboard navigation
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowLeft') {
-        changeSlide(-1);
-    } else if (e.key === 'ArrowRight') {
-        changeSlide(1);
+    function changeSlide(direction) {
+        currentSlideIndex += direction;
+        
+        // Handle wrapping
+        if (currentSlideIndex >= slides.length) {
+            currentSlideIndex = 0;
+        } else if (currentSlideIndex < 0) {
+            currentSlideIndex = slides.length - 1;
+        }
+        
+        showSlide(currentSlideIndex);
     }
+    
+    // Optional: Auto-slide every 7 seconds
+    setInterval(() => changeSlide(1), 7000);
+    
+    // Add keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            changeSlide(-1);
+        } else if (e.key === 'ArrowRight') {
+            changeSlide(1);
+        }
+    });
+}
+
+// Fix skill bars animation
+document.addEventListener('DOMContentLoaded', function() {
+    const skillBars = document.querySelectorAll('.skill-progress');
+    
+    skillBars.forEach(bar => {
+        const skillValue = bar.getAttribute('data-skill');
+        bar.style.width = skillValue + '%';
+    });
 });
 
-// Touch/swipe support for mobile
-let startX = 0;
-let endX = 0;
+// GitHub Repositories - Simple fetch with error handling
+document.addEventListener('DOMContentLoaded', function() {
+    const repoList = document.getElementById('github-repo-list');
+    if (!repoList) return;
 
-const slideshowContainer = document.querySelector('.slideshow-container');
-
-if (slideshowContainer) {
-    slideshowContainer.addEventListener('touchstart', function(e) {
-        startX = e.touches[0].clientX;
-    });
-
-    slideshowContainer.addEventListener('touchend', function(e) {
-        endX = e.changedTouches[0].clientX;
-        handleSwipe();
-    });
-
-    function handleSwipe() {
-        const threshold = 50; // Minimum swipe distance
-        const diff = startX - endX;
-        
-        if (Math.abs(diff) > threshold) {
-            if (diff > 0) {
-                // Swiped left - next slide
-                changeSlide(1);
-            } else {
-                // Swiped right - previous slide
-                changeSlide(-1);
+    fetch('https://api.github.com/users/RAHULKRISHNAKR/repos?sort=updated&per_page=100')
+        .then(res => {
+            if (!res.ok) throw new Error('Network response was not ok');
+            return res.json();
+        })
+        .then(repos => {
+            if (!Array.isArray(repos) || repos.length === 0) {
+                repoList.innerHTML = '<p>No repositories found.</p>';
+                return;
             }
-        }
-    }
-}
+            
+            repoList.innerHTML = '';
+            repos.forEach(repo => {
+                const desc = repo.description ? 
+                    (repo.description.length > 60 ? 
+                        repo.description.slice(0, 60) + '...' : 
+                        repo.description) : 
+                    'No description.';
+                
+                const card = document.createElement('div');
+                card.className = 'github-repo-card';
+                card.innerHTML = `
+                    <h3 title="${repo.name}">${repo.name}</h3>
+                    <p title="${repo.description || ''}">${desc}</p>
+                    <div class="repo-links">
+                        <a href="${repo.html_url}" target="_blank" rel="noopener">Repo</a>
+                        ${repo.homepage ? 
+                            `<a href="${repo.homepage}" target="_blank" rel="noopener">Live</a>` : 
+                            ''}
+                    </div>
+                `;
+                repoList.appendChild(card);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching repositories:', error);
+            repoList.innerHTML = '<p>Unable to load repositories.</p>';
+        });
+});
+
+// Enhance horizontal scrolling with visibility and parallax effects
+document.addEventListener('DOMContentLoaded', function () {
+  const sections = document.querySelectorAll('.horizontal-section');
+  const scrollContainer = document.querySelector('.horizontal-scroll-container');
+
+  if (!sections.length || !scrollContainer) return;
+
+  // Update section visibility on scroll
+  function updateSectionVisibility() {
+    const scrollLeft = scrollContainer.scrollLeft;
+    const viewportWidth = window.innerWidth;
+
+    sections.forEach((section, index) => {
+      const sectionLeft = index * viewportWidth;
+      const sectionRight = sectionLeft + viewportWidth;
+
+      if (scrollLeft >= sectionLeft && scrollLeft < sectionRight) {
+        section.classList.add('section-visible');
+      } else {
+        section.classList.remove('section-visible');
+      }
+    });
+  }
+
+  // Smooth scrolling for navigation links
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      const targetSection = document.getElementById(targetId);
+
+      if (targetSection) {
+        const targetIndex = Array.from(sections).indexOf(targetSection);
+        scrollContainer.scrollTo({
+          left: targetIndex * window.innerWidth,
+          behavior: 'smooth',
+        });
+      }
+    });
+  });
+
+  // Add scroll event listener
+  scrollContainer.addEventListener('scroll', updateSectionVisibility);
+
+  // Initialize visibility on page load
+  updateSectionVisibility();
+});
