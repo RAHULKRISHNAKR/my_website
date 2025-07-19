@@ -1,0 +1,111 @@
+/* Horizontal Scrolling Enhancements */
+.horizontal-wrapper {
+  overflow: hidden;
+}
+
+.horizontal-scroll-container {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.horizontal-section {
+  opacity: 0.85;
+  filter: blur(1px);
+  transform: scale(0.98);
+  transition: 
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), 
+    filter 0.8s cubic-bezier(0.22, 1, 0.36, 1), 
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.horizontal-section.section-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+}
+
+/* Section content transitions */
+.section-content {
+  transform: translateY(20px);
+  opacity: 0.7;
+  transition: 
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s, 
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+
+.section-visible .section-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Background parallax effects */
+.horizontal-section::before {
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.section-visible::before {
+  transform: translateY(-5%);
+}
+
+/* Smooth slide transitions */
+@keyframes slideIn {
+  from { transform: translateX(30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.horizontal-section.section-visible .section-content > * {
+  animation: slideIn 0.6s forwards;
+  animation-delay: calc(var(--item-index, 0) * 0.1s);
+}
+
+/* Responsive adaptations */
+@media screen and (max-width: 768px) {
+  /* Reset horizontal scroll styles for mobile */
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto !important;
+    background-color: #0F0F0F;
+  }
+  
+  .horizontal-wrapper {
+    position: static !important;
+    height: auto !important;
+    overflow: visible;
+  }
+  
+  .horizontal-scroll-container {
+    position: static;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    transition: none;
+  }
+  
+  .horizontal-section {
+    width: 100% !important;
+    min-height: 100vh;
+    height: auto !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none;
+    display: block !important;
+    position: relative;
+    padding: 60px 20px !important; /* Add some padding for mobile */
+    background-color: #0F0F0F;
+  }
+  
+  .section-content {
+    transform: none !important;
+    opacity: 1 !important;
+    position: relative;
+    width: 100%;
+  }
+  
+  /* Ensure navigation works in mobile mode */
+  .nav-link {
+    scroll-behavior: smooth;
+  }
+}

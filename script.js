@@ -28,7 +28,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Remove theme toggle functionality
+    // Setup footer animations
+    const footer = document.querySelector('footer');
+    if (footer) {
+        const footerElements = footer.querySelectorAll('.footer-content > *');
+        footerElements.forEach((el, index) => {
+            el.style.setProperty('--footer-index', index);
+        });
+        
+        // Create a MutationObserver to watch for style changes
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                if (mutation.attributeName === 'style') {
+                    const transformValue = footer.style.transform;
+                    // If footer becomes visible, add class for animations
+                    if (transformValue === 'translateY(0%)') {
+                        footer.classList.add('visible');
+                    } else {
+                        footer.classList.remove('visible');
+                    }
+                }
+            });
+        });
+        
+        // Start observing the footer for style changes
+        observer.observe(footer, { attributes: true });
+    }
     
     // Fix project slideshow functionality
     initializeSlideshow();

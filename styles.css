@@ -1,20 +1,20 @@
 /* CSS Custom Properties with Enhanced Color Palette */
 :root {
-  --bg-primary: rgba(8, 15, 30, 0.85);
-  --bg-secondary: rgba(16, 23, 41, 0.9);
-  --bg-tertiary: rgba(20, 29, 47, 0.8);
-  --accent-primary: #64ffda;
-  --accent-secondary: #a8dadc;
-  --accent-tertiary: #e63946;
-  --text-primary: #fff;
-  --text-secondary: #a8dadc;
+  --bg-primary: #0F0F0F;
+  --bg-secondary: rgba(15, 15, 15, 0.9);
+  --bg-tertiary: rgba(15, 15, 15, 0.8);
+  --accent-primary: #00ADB5;
+  --accent-secondary: #EEEEEE;
+  --accent-tertiary: #FF5722;
+  --text-primary: #F5F5F5;
+  --text-secondary: #EEEEEE;
   --card-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%);
   --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 1px 8px rgba(0, 0, 0, 0.3);
-  --card-text: #fff;
-  --nav-bg: rgba(8, 15, 30, 0.8);
-  --nav-bg-hover: rgba(16, 23, 41, 0.9);
+  --card-text: #F5F5F5;
+  --nav-bg: rgba(15, 15, 15, 0.8);
+  --nav-bg-hover: rgba(20, 20, 20, 0.9);
   --skill-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
-  --skill-text: #e0e0e0;
+  --skill-text: #EEEEEE;
   --skill-border: var(--accent-primary);
   --card-border: 1px solid rgba(255, 255, 255, 0.1);
   --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -633,11 +633,13 @@ nav:hover {
 /* Enhanced Footer */
 footer {
   position: relative;
-  background-color: var(--bg-secondary);
+  background: linear-gradient(to top, var(--bg-primary), rgba(8, 15, 30, 0.9));
   color: var(--text-primary);
-  padding: 30px 0;
+  padding: 40px 0;
   text-align: center;
   overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
 }
 
 footer::before {
@@ -646,13 +648,17 @@ footer::before {
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
+  height: 3px;
   background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+  opacity: 0.7;
 }
 
 footer p {
   position: relative;
   z-index: 1;
+  margin: 15px 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
 }
 
 .fixed-coffee-button {
@@ -685,127 +691,101 @@ footer p {
 
 /* Enhanced Mobile Responsiveness */
 @media screen and (max-width: 768px) {
-  /* Optimize for tablets and large phones */
   nav {
-    width: calc(100% - 16px);
-    margin: 8px;
-    padding: 12px;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
   }
-  
+
   .hero h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
   }
-  
+
   .hero .btn {
-    padding: 12px 24px;
+    padding: 10px 20px;
     font-size: 0.9rem;
   }
-  
+
   .about-details {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
+
   .card {
     height: auto;
-    min-height: 280px;
-    max-height: none;
     margin-bottom: 16px;
+    padding: 1rem;
   }
-  
+
   .social-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-}
 
-@media screen and (max-width: 480px) {
-  /* Further optimizations for small phones */
-  .hero h1 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-    padding: 0 10px;
-  }
-  
-  .typewriter {
-    font-size: 1.1rem;
-  }
-  
-  .hero .btn {
-    padding: 10px 20px;
-    font-size: 0.85rem;
-  }
-  
-  .scroll-indicator {
-    bottom: 20px;
-  }
-  
-  .card {
-    padding: 1rem;
-    border-radius: 15px;
-  }
-  
-  .card h3 {
-    font-size: 1.1rem;
-  }
-  
-  .skill-item {
-    padding: 0.75rem;
-  }
-  
   .fixed-coffee-button {
-    bottom: 20px;
-    right: 20px;
+    bottom: 15px;
+    right: 15px;
     padding: 8px 16px;
     font-size: 0.85rem;
   }
-  
-  .profile-text p {
-    font-size: 0.95rem;
+}
+
+@media screen and (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
   }
-  
-  /* Adjust project slide for mobile */
+
+  .hero .btn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+
+  .card h3 {
+    font-size: 1rem;
+  }
+
   .project-slide {
     flex-direction: column !important;
   }
-  
+
   .project-image {
     width: 100% !important;
-    height: 200px !important;
+    height: 180px !important;
   }
-  
-  /* Make contact cards more compact */
+
   .social-card {
     min-height: 70px;
-    padding: 15px 12px;
+    padding: 12px 10px;
   }
-  
+
   .social-icon {
-    min-width: 36px;
-    min-height: 36px;
+    min-width: 32px;
+    min-height: 32px;
   }
 }
 
 /* Fix for very small screens */
 @media screen and (max-width: 350px) {
   .hero h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
-  
+
   .card h3 {
-    font-size: 1rem;
-  }
-  
-  .social-info h3 {
     font-size: 0.9rem;
   }
-  
-  .social-info span {
+
+  .social-info h3 {
     font-size: 0.8rem;
   }
-}
 
-/* ...existing code... */
+  .social-info span {
+    font-size: 0.7rem;
+  }
+}
 
 /* Profile Image Styles */
 .profile-container {
@@ -1341,7 +1321,7 @@ footer p {
   display: flex;
   flex-direction: row;
   will-change: transform;
-  transition: transform 0.3s ease-out; /* Smooth transition */
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth transition */
   height: 100vh;
   scroll-snap-type: x mandatory; /* Snap sections into view */
 }
@@ -1357,8 +1337,9 @@ footer p {
 }
 
 .horizontal-section:not(.section-visible) {
-  opacity: 0.5; /* Dim non-visible sections */
+  opacity: 0.6; /* Dim non-visible sections */
   transform: scale(0.95); /* Slightly shrink non-visible sections */
+  filter: blur(1px); /* Subtle blur effect */
 }
 
 /* Parallax Effect for Backgrounds */
@@ -1373,34 +1354,42 @@ footer p {
   background-position: center;
   z-index: -1;
   transform: translateY(0);
-  transition: transform 0.3s ease-out;
+  transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+  will-change: transform;
 }
 
 #home.horizontal-section::before {
-  background-image: url('assets/hero-bg.jpg');
+  background-image: linear-gradient(rgba(8, 15, 30, 0.7), rgba(8, 15, 30, 0.7)), url('assets/coding-background.jpg');
 }
 
 #about.horizontal-section::before {
-  background-image: url('assets/about-bg.jpg');
+  background-image: linear-gradient(rgba(8, 15, 30, 0.8), rgba(8, 15, 30, 0.8)), url('assets/about-background.jpeg');
 }
 
 #projects.horizontal-section::before {
-  background-image: url('assets/projects-bg.jpg');
+  background-image: linear-gradient(rgba(8, 15, 30, 0.8), rgba(8, 15, 30, 0.8)), url('assets/coding-background.jpg');
 }
 
 #contact.horizontal-section::before {
-  background-image: url('assets/contact-bg.jpg');
+  background-image: linear-gradient(rgba(8, 15, 30, 0.85), rgba(8, 15, 30, 0.85)), url('assets/coding-background.jpg');
 }
 
 /* Parallax Scrolling Effect */
 .horizontal-section.section-visible::before {
-  transform: translateY(-10%); /* Slight parallax shift */
+  transform: translateY(-5%); /* Subtle parallax shift */
 }
 
-/* Smooth Section Transitions */
-.horizontal-section.section-visible {
+/* Enhanced Section Content Transitions */
+.section-content {
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: transform, opacity;
+}
+
+.horizontal-section.section-visible .section-content {
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(0);
 }
 
 /* Scroll Indicator Enhancements */

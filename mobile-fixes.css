@@ -1,0 +1,64 @@
+/* Mobile-specific enhancements */
+
+/* Fix for mobile scrolling */
+@media screen and (max-width: 768px) {
+  html, body {
+    overflow-x: hidden !important;
+    position: relative;
+    width: 100%;
+    height: auto !important;
+    background-color: #0F0F0F;
+  }
+  
+  /* Ensure sections are properly sized */
+  .horizontal-section {
+    min-height: 100vh;
+    position: relative;
+    width: 100% !important;
+    overflow: hidden;
+    background-color: #0F0F0F;
+  }
+  
+  /* Properly space content for mobile */
+  .section-content {
+    padding: 60px 20px !important;
+  }
+  
+  /* Fix navigation on mobile */
+  .nav-links {
+    background: rgba(15, 15, 15, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  /* Improve social grid display on mobile */
+  .social-grid {
+    grid-template-columns: 1fr !important;
+    gap: 15px;
+  }
+  
+  /* Make sure all sections are visible */
+  #home, #about, #projects, #github-repos, #contact {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    background-color: #0F0F0F;
+  }
+  
+  /* Fix profile section for mobile */
+  .profile-image {
+    width: 80% !important;
+    max-width: 250px !important;
+    margin: 0 auto;
+  }
+  
+  /* Fix project display on mobile */
+  .project-slide {
+    flex-direction: column !important;
+  }
+  
+  .project-image {
+    width: 100% !important;
+    height: auto !important;
+  }
+}

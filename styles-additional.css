@@ -2,7 +2,7 @@
 
 /* ===== GLASSMORPHISM EFFECTS ===== */
 .glass-nav {
-  background: rgba(8, 15, 30, 0.8) !important; /* Ensure proper background */
+  background: rgba(15, 15, 15, 0.8) !important; /* Updated background color */
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -416,19 +416,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
+  animation: fadeInUp 0.8s forwards;
 }
 
 .footer-logo {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: var(--accent-primary);
   margin-bottom: 0.5rem;
+  text-shadow: 0 0 15px rgba(100, 255, 218, 0.4);
+  animation: pulse 3s infinite;
 }
 
 .footer-social {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-top: 1rem;
 }
 
@@ -442,12 +445,26 @@
   color: var(--text-primary);
   border-radius: 50%;
   transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .social-icon:hover {
   background: var(--accent-primary);
   color: var(--bg-secondary);
   transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ===== COFFEE BUTTON ENHANCEMENTS ===== */
@@ -881,28 +898,28 @@
 
 /* Make glass elements more transparent in light mode */
 [data-theme="light"] .glass-nav {
-  background: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(238, 238, 238, 0.3) !important;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 [data-theme="light"] .glass-card {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(238, 238, 238, 0.3);
 }
 
 /* Improve card visibility in light mode */
 [data-theme="light"] .card {
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(238, 238, 238, 0.5);
+  border: 1px solid rgba(238, 238, 238, 0.7);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 /* Fix text contrast issues in light mode */
 [data-theme="light"] .nav-link {
-  color: #0a4875 !important; 
+  color: #0F0F0F !important; 
 }
 
 [data-theme="light"] .nav-link:hover {
-  color: #0a66c2 !important;
+  color: #00ADB5 !important;
 }
 
 /* Enhanced Light Mode Styling */
@@ -1071,17 +1088,25 @@
 /* Smooth Scrolling Enhancements */
 .horizontal-scroll-container {
   scroll-behavior: smooth; /* Smooth scrolling behavior */
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth easing for transitions */
 }
 
 .horizontal-section {
-  opacity: 0;
-  transform: translateX(40px);
+  opacity: 0.7;
+  transform: translateX(20px) scale(0.98);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  overflow: hidden;
 }
 
 .horizontal-section.section-visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) scale(1);
+}
+
+/* Enhanced section transitions */
+.section-content {
+  transition: transform 0.5s ease-out;
+  will-change: transform;
 }
 
 /* Parallax Backgrounds */
@@ -1096,11 +1121,47 @@
   background-position: center;
   z-index: -1;
   transform: translateY(0);
-  transition: transform 0.3s ease-out;
+  transition: transform 0.8s ease-out;
 }
 
 .horizontal-section.section-visible::before {
-  transform: translateY(-10%); /* Parallax effect */
+  transform: translateY(-5%); /* Subtle parallax effect */
+}
+
+/* Footer transition enhancement */
+footer {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  will-change: transform;
+}
+
+/* Footer placeholder styling */
+.footer-placeholder {
+  background: transparent;
+  position: relative;
+}
+
+.footer-placeholder::before {
+  content: '';
+  position: absolute;
+  bottom: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: var(--accent-primary);
+  opacity: 0.5;
+  border-radius: 2px;
+}
+
+.footer-placeholder::after {
+  content: 'Scroll for footer';
+  position: absolute;
+  bottom: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--accent-primary);
+  font-size: 14px;
+  opacity: 0.7;
 }
 
 /* Responsive Touch Enhancements */
@@ -1138,26 +1199,25 @@
 /* Mobile navigation enhancements */
 @media screen and (max-width: 768px) {
   .nav-links {
-    width: 100% !important;
-    height: 100vh !important;
-    padding: 60px 20px !important;
-    z-index: 999 !important;
+    width: 100%;
+    height: 100vh;
+    padding: 50px 20px;
+    z-index: 999;
+    flex-direction: column;
+    align-items: center;
   }
-  
+
   .hamburger {
-    z-index: 1001 !important;
+    z-index: 1001;
   }
-  
-  /* Mobile vertical layout */
+
   .horizontal-section {
-    transition: opacity 0.6s ease;
-    opacity: 1 !important; 
+    opacity: 1 !important;
     transform: none !important;
   }
-  
-  /* Improved section spacing on mobile */
+
   .section-content {
-    padding: 60px 16px;
+    padding: 50px 16px;
   }
 }
 
@@ -1169,4 +1229,89 @@
     overflow: visible !important;
     max-height: none !important;
   }
+}
+
+/* GitHub Repositories Section */
+.github-repos-section {
+  background-color: rgba(20, 20, 20, 0.9);
+  padding: 40px 20px;
+  text-align: center;
+  color: #F5F5F5;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  margin: 40px auto 0 auto;
+  max-width: 1100px;
+}
+
+.github-repos-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 18px;
+  color: #00ADB5;
+}
+
+.github-repo-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  justify-content: center;
+  margin-top: 12px;
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.github-repo-list::-webkit-scrollbar {
+  width: 8px;
+  background: #222222;
+  border-radius: 8px;
+}
+.github-repo-list::-webkit-scrollbar-thumb {
+  background: #00ADB5;
+  border-radius: 8px;
+}
+
+.github-repo-card {
+  background: #1A1A1A;
+  color: #F5F5F5;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.10);
+  padding: 12px 14px;
+  width: 100%;
+  min-width: 0;
+  max-width: 260px;
+  text-align: left;
+  transition: transform 0.15s;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.93rem;
+}
+
+.github-repo-card h3 {
+  font-size: 1rem;
+  margin-bottom: 4px;
+  color: #00ADB5;
+  word-break: break-all;
+}
+
+.github-repo-card p {
+  font-size: 0.88rem;
+  margin-bottom: 6px;
+  color: #EEEEEE;
+  min-height: 32px;
+  max-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.github-repo-card .repo-links a {
+  color: #FF5722;
+  text-decoration: none;
+  font-weight: 500;
+  margin-right: 8px;
+  font-size: 0.92rem;
+  transition: color 0.2s;
+}
+
+.github-repo-card .repo-links a:hover {
+  color: #00ADB5;
 }

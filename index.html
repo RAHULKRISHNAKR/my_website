@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta name="description" content="Rahul Krishna K R - Creative Portfolio - Data Science & Development">
   <title>Rahul Krishna K R | Creative Portfolio</title>
   <!-- Load base styles first -->
   <link rel="stylesheet" href="styles.css">
   <!-- Then load additional styles to override if needed -->
   <link rel="stylesheet" href="styles-additional.css">
+  <!-- Horizontal scroll specific styles -->
+  <link rel="stylesheet" href="styles-horizontal.css">
+  <!-- Contact section enhancements -->
+  <link rel="stylesheet" href="contact-enhancements.css">
+  <!-- Mobile-specific fixes -->
+  <link rel="stylesheet" href="mobile-fixes.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" />
   <script src="horizontal-scroll.js" defer></script>
@@ -402,7 +408,7 @@
       </section>
   
       <!-- Contact Section -->
-      <section id="contact" class="contact horizontal-section">
+      <section id="contact" class="contact horizontal-section contact-section-enhancement">
         <div class="contact-container section-content">
             <h2>Contact Me</h2>
             <p>Let's connect and create something amazing together!</p>
@@ -518,6 +524,29 @@
         phraseIndex = (phraseIndex + 1) % phrases.length;
         typewriterText.textContent = phrases[phraseIndex];
       }, 3000);
+    });
+    
+    // Mobile navigation smooth scrolling enhancement
+    document.addEventListener('DOMContentLoaded', function() {
+      const isMobile = window.innerWidth <= 768;
+      if (isMobile) {
+        // Add smooth scrolling to navigation links on mobile
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+              e.preventDefault();
+              window.scrollTo({
+                top: targetSection.offsetTop,
+                behavior: 'smooth'
+              });
+            }
+          });
+        });
+      }
     });
   </script>
 </body>

@@ -1,0 +1,60 @@
+.contact-section-enhancement {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Smooth transitions between sections */
+.horizontal-section {
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Enhance the contact section */
+#contact {
+  position: relative;
+}
+
+#contact::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  background: linear-gradient(to bottom, transparent, rgba(15, 15, 15, 0.4));
+  pointer-events: none;
+}
+
+/* Add smooth transitions to all horizontal-section elements */
+.horizontal-section > * {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* Improved section transitions with hardware acceleration */
+.horizontal-scroll-container {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+/* Mobile enhancements for better spacing and appearance */
+@media screen and (max-width: 768px) {
+  .contact-section-enhancement {
+    padding-bottom: 40px !important;
+    background-color: #0F0F0F;
+  }
+  
+  .social-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  #contact::after {
+    height: 10%;
+  }
+  
+  /* Ensure contact content is fully visible */
+  #contact .contact-container {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
